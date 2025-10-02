@@ -55,7 +55,7 @@ impl HttpResponse {
 // HTTP functions in namespace Elephant\Net\Http
 
 #[php_function]
-pub fn request(
+pub fn http_request(
     method: String,
     url: String,
     headers: Option<HashMap<String, String>>,
@@ -114,13 +114,13 @@ pub fn request(
 
 /// HTTP GET request
 #[php_function]
-pub fn get(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
-    request("GET".to_string(), url, headers, None, Some(30))
+pub fn http_get(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
+    http_request("GET".to_string(), url, headers, None, Some(30))
 }
 
 /// HTTP POST request
 #[php_function]
-pub fn post(
+pub fn http_post(
     url: String,
     body: Option<String>,
     headers: Option<HashMap<String, String>>,
@@ -132,12 +132,12 @@ pub fn post(
         final_headers.insert("Content-Type".to_string(), "application/json".to_string());
     }
 
-    request("POST".to_string(), url, Some(final_headers), body, Some(30))
+    http_request("POST".to_string(), url, Some(final_headers), body, Some(30))
 }
 
 /// HTTP PUT request
 #[php_function]
-pub fn put(
+pub fn http_put(
     url: String,
     body: Option<String>,
     headers: Option<HashMap<String, String>>,
@@ -148,18 +148,18 @@ pub fn put(
         final_headers.insert("Content-Type".to_string(), "application/json".to_string());
     }
 
-    request("PUT".to_string(), url, Some(final_headers), body, Some(30))
+    http_request("PUT".to_string(), url, Some(final_headers), body, Some(30))
 }
 
 /// HTTP DELETE request
 #[php_function]
-pub fn delete(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
-    request("DELETE".to_string(), url, headers, None, Some(30))
+pub fn http_delete(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
+    http_request("DELETE".to_string(), url, headers, None, Some(30))
 }
 
 /// HTTP PATCH request
 #[php_function]
-pub fn patch(
+pub fn http_patch(
     url: String,
     body: Option<String>,
     headers: Option<HashMap<String, String>>,
@@ -170,19 +170,19 @@ pub fn patch(
         final_headers.insert("Content-Type".to_string(), "application/json".to_string());
     }
 
-    request("PATCH".to_string(), url, Some(final_headers), body, Some(30))
+    http_request("PATCH".to_string(), url, Some(final_headers), body, Some(30))
 }
 
 /// HTTP HEAD request
 #[php_function]
-pub fn head(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
-    request("HEAD".to_string(), url, headers, None, Some(30))
+pub fn http_head(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
+    http_request("HEAD".to_string(), url, headers, None, Some(30))
 }
 
 /// HTTP OPTIONS request
 #[php_function]
 pub fn options(url: String, headers: Option<HashMap<String, String>>) -> PhpResult<HttpResponse> {
-    request("OPTIONS".to_string(), url, headers, None, Some(30))
+    http_request("OPTIONS".to_string(), url, headers, None, Some(30))
 }
 
 
